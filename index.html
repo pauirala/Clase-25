@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manicure Studio | Agenda</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">✦</div>
+        <div>
+          <h1>Manicure Studio</h1>
+          <span>Panel de agenda</span>
+        </div>
+      </div>
+
+      <nav>
+        <button class="nav-item active" data-section="agenda">📅 Agenda</button>
+        <button class="nav-item" data-section="nuevo">＋ Nueva cita</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <small>Gestión de citas</small>
+        <p>Los datos se guardan en este navegador.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">SALÓN DE MANICURE</p>
+          <h2>Agenda de citas</h2>
+        </div>
+        <button class="primary-btn" id="newAppointmentBtn">＋ Nueva cita</button>
+      </header>
+
+      <section class="stats">
+        <article class="stat-card">
+          <span class="stat-label">Total de citas</span>
+          <strong id="totalCount">0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Pendientes</span>
+          <strong id="pendingCount">0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Confirmadas</span>
+          <strong id="confirmedCount">0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Hoy</span>
+          <strong id="todayCount">0</strong>
+        </article>
+      </section>
+
+      <section id="agendaSection" class="content-section">
+        <div class="toolbar">
+          <div class="search-box">
+            <span>⌕</span>
+            <input type="search" id="searchInput" placeholder="Buscar por nombre o celular...">
+          </div>
+
+          <select id="statusFilter">
+            <option value="">Todos los estados</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Confirmada">Confirmada</option>
+            <option value="Atendida">Atendida</option>
+            <option value="Cancelada">Cancelada</option>
+          </select>
+
+          <input type="date" id="dateFilter">
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <div>
+              <h3>Citas registradas</h3>
+              <p id="resultsText">0 resultados</p>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Celular</th>
+                  <th>Servicio</th>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="appointmentsBody"></tbody>
+            </table>
+            <div id="emptyState" class="empty-state">
+              <div class="empty-icon">💅</div>
+              <h3>No hay citas registradas</h3>
+              <p>Agregá la primera cita para comenzar a organizar tu agenda.</p>
+              <button class="primary-btn" id="emptyNewBtn">＋ Nueva cita</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="formSection" class="content-section hidden">
+        <div class="form-card">
+          <div class="form-title">
+            <div>
+              <p class="eyebrow">AGENDA</p>
+              <h3 id="formTitle">Registrar nueva cita</h3>
+              <p>Completá los datos de la clienta y del servicio.</p>
+            </div>
+            <button class="close-btn" id="cancelFormBtn" title="Volver">×</button>
+          </div>
+
+          <form id="appointmentForm">
+            <input type="hidden" id="appointmentId">
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="firstName">Nombre <span>*</span></label>
+                <input id="firstName" type="text" required placeholder="Ej. María">
+              </div>
+
+              <div class="field">
+                <label for="lastName">Apellido <span>*</span></label>
+                <input id="lastName" type="text" required placeholder="Ej. González">
+              </div>
+
+              <div class="field">
+                <label for="phone">Número de celular <span>*</span></label>
+                <input id="phone" type="tel" required placeholder="Ej. 0981 123 456">
+              </div>
+
+              <div class="field">
+                <label for="service">Servicio deseado <span>*</span></label>
+                <select id="service" required>
+                  <option value="">Seleccionar servicio</option>
+                  <option>Manicure clásica</option>
+                  <option>Manicure semipermanente</option>
+                  <option>Manicure con diseño</option>
+                  <option>Uñas soft gel</option>
+                  <option>Uñas acrílicas</option>
+                  <option>Retiro de esmalte</option>
+                  <option>Retiro + nuevo servicio</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="appointmentDate">Fecha de cita <span>*</span></label>
+                <input id="appointmentDate" type="date" required>
+              </div>
+
+              <div class="field">
+                <label for="appointmentTime">Hora de cita <span>*</span></label>
+                <input id="appointmentTime" type="time" required>
+              </div>
+
+              <div class="field">
+                <label for="nails">Tipo / largo de uñas</label>
+                <select id="nails">
+                  <option value="">No especificado</option>
+                  <option>Naturales</option>
+                  <option>Cortas</option>
+                  <option>Medianas</option>
+                  <option>Largas</option>
+                  <option>Extra largas</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="status">Estado</label>
+                <select id="status">
+                  <option>Pendiente</option>
+                  <option>Confirmada</option>
+                  <option>Atendida</option>
+                  <option>Cancelada</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="notes">Observaciones</label>
+                <textarea id="notes" rows="4" placeholder="Diseño, color, alergias, preferencias, etc."></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="secondary-btn" id="cancelFormBtn2">Cancelar</button>
+              <button type="submit" class="primary-btn">Guardar cita</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="deleteModal">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card">
+      <div class="modal-icon">!</div>
+      <h3>¿Eliminar esta cita?</h3>
+      <p>Esta acción no se puede deshacer.</p>
+      <div class="modal-actions">
+        <button class="secondary-btn" data-close-modal>Cancelar</button>
+        <button class="danger-btn" id="confirmDeleteBtn">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
