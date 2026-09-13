@@ -266,7 +266,7 @@ renderTable();
 /* Datos de ejemplo opcionales:
    Si querés iniciar el sistema con citas de prueba,
    descomentá el bloque siguiente y recargá la página.
-
+*/
 appointments = [
   {
     id: crypto.randomUUID(),
@@ -282,4 +282,4 @@ appointments = [
   }
 ];
 save();
-*/
+
